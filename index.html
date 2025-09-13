@@ -1,18 +1,340 @@
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Peter Menh — Resume</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --accent:#0f62fe; /* accessible blue */
+      /* muted set darker for better contrast on light backgrounds */
+      --muted:#475569; /* mid-dark gray */
+      --text:#0f172a; /* default page text (dark) */
+      /* eggshell / off-white tones */
+      --bg:#404943; /* page background (eggshell) */
+      --card:#fbfaf7; /* card background, slightly lighter */
+      --max-width:1920px
+    }
+    /* header meta (links / website shown in header) */
+    .header-meta{color:rgba(255,255,255,0.85);font-size:0.95rem;text-align:center}
+    *{box-sizing:border-box}
+    body{
+      font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      padding:40px 20px;
+    }
+    :root{--sidebar-width:280px}
+    .container{
+      max-width:var(--max-width);
+      margin:0 auto;
+      background:var(--card);
+      border-radius:12px;
+      box-shadow:0 6px 30px rgba(16,24,40,0.08);
+      padding:28px;
+      display:grid;
+      grid-template-columns:var(--sidebar-width) 1fr; /* responsive sidebar */
+      gap:28px;
+    }
+
+    /* Increase sidebar width on larger viewports */
+    @media (min-width:1000px){
+      :root{--sidebar-width:320px}
+    }
+    @media (min-width:1400px){
+      :root{--sidebar-width:360px}
+    }
+
+    header.resume-header{
+      grid-column:1 / -1;
+      /* center content vertically and horizontally, stack items */
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      margin:0 0 18px 0;
+      padding:22px 20px 18px 20px;
+      background:rgba(31,41,55,0.96); /* dark grey header background */
+      color:#f8fafc; /* light text for readability */
+      border-radius:10px; /* subtle rounding to stand out on the card */
+    }
+    .name-block{
+      display:flex;
+      flex-direction:column;
+      align-items:center; /* center children horizontally */
+    }
+    .header-summary{color:rgba(255,255,255,0.92);max-width:820px;line-height:1.6;margin-top:6px;text-align:left}
+    h1{
+      margin:0;
+      /* doubled size */
+      font-size:3.2rem;
+      letter-spacing:-0.5px;
+      font-weight:700;
+    }
+    /* doubled title size */
+    .title{color:rgba(255,255,255,0.9);font-weight:600;font-size:2rem}
+    .contact{color:rgba(255,255,255,0.75);font-size:0.9rem}
+
+    /* Left column */
+    .sidebar{
+      padding:16px 16px;
+      border-radius:8px;
+      background:linear-gradient(180deg, rgba(6,78,78,0.98), rgba(6,78,78,0.92)); /* dark teal */
+      color:#fff;
+      height:100%;
+    }
+    /* make section titles and common sidebar text readable on dark bg */
+    .sidebar .section-title{color:rgba(255,255,255,0.95)}
+    .sidebar .edu-item{color:rgba(255,255,255,0.92)}
+    .sidebar .link{color:rgba(255,255,255,0.92)}
+    .sidebar .skill{background:rgba(255,255,255,0.08);color:#fff;border:1px solid rgba(255,255,255,0.08)}
+
+    /* header-specific overrides to ensure contrast */
+    .resume-header .title{color:rgba(255,255,255,0.9)}
+    .resume-header .contact{color:rgba(255,255,255,0.75);font-size:0.95rem}
+    .resume-header .header-meta{color:rgba(255,255,255,0.9)}
+
+    .section-title{
+      font-size:0.85rem;
+      text-transform:uppercase;
+      color:var(--muted);
+      letter-spacing:1px;
+      margin-bottom:8px;
+      font-weight:700; /* make section headers bold */
+    }
+    .skills, .education, .links{
+      margin-bottom:18px;
+    }
+    /* skills layout: categories with pill-style items */
+    .skill-list{display:flex;flex-direction:column;gap:8px}
+    .skill-category{font-weight:700;color:var(--muted);font-size:0.95rem;margin-top:6px}
+    /* lighter skill category color when shown in the dark sidebar */
+    .sidebar .skill-category{color:rgba(255,255,255,0.92)}
+    .skill-items{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+    .skill{background:#eef2ff;color:var(--accent);padding:6px 10px;border-radius:999px;font-weight:600;font-size:0.85rem}
+    .edu-item{font-size:0.95rem}
+    .link{color:var(--accent);text-decoration:none;font-weight:600}
+    a.link:focus, a.link:hover{outline:2px solid rgba(15,98,254,0.18);outline-offset:2px}
+
+    /* Certifications list spacing */
+    .cert-list{margin:0;padding-left:18px}
+    .cert-list li{margin-bottom:8px}
+    .cert-list li:last-child{margin-bottom:0}
+
+    /* Main column */
+    .main{
+      padding:12px 14px;
+    }
+    .summary{
+      color:#111827;margin-bottom:14px;line-height:1.5;background:transparent;
+    }
+
+    /* Experience */
+    #experience h2{margin:0 0 12px 0}
+    .jobs{display:flex;flex-direction:column;gap:12px}
+    .job{
+      padding:14px;border-radius:8px;background:linear-gradient(90deg,rgba(15,23,42,0.01),rgba(15,23,42,0.01));border-left:4px solid rgba(37,99,235,0.12)
+    }
+    .job header{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+    .job h3{margin:0;font-size:1.02rem}
+    .company{color:var(--muted);font-weight:600}
+    .job time{color:var(--muted);font-size:0.9rem}
+    .job .location{color:var(--muted);font-size:0.9rem;margin-top:6px}
+    .job ul{margin:8px 0 0 18px}
+    .job li{margin-bottom:6px}
+
+    /* Footer / small print */
+    small{display:block;color:var(--muted);margin-top:14px}
+
+    @media (max-width:760px){
+      .container{grid-template-columns:1fr;padding:20px}
+      .sidebar{order:2}
+      .main{order:1}
+      /* scale heading sizes down on small screens */
+      h1{font-size:2.2rem}
+      .title{font-size:1.2rem}
+    }
+  </style>
 </head>
 <body>
-    <div>
-        <h1>Peter, Hello World</h1>
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Hic, suscipit inventore. Hic ipsa nemo suscipit praesentium inventore similique fugiat! Natus facere labore hic necessitatibus possimus tempora nesciunt culpa et ipsam!</p>
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Hic, suscipit inventore. Hic ipsa nemo suscipit praesentium inventore similique fugiat! Natus facere labore hic necessitatibus possimus tempora nesciunt culpa et ipsam!</p>
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Hic, suscipit inventore. Hic ipsa nemo suscipit praesentium inventore similique fugiat! Natus facere labore hic necessitatibus possimus tempora nesciunt culpa et ipsam!</p>
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Hic, suscipit inventore. Hic ipsa nemo suscipit praesentium inventore similique fugiat! Natus facere labore hic necessitatibus possimus tempora nesciunt culpa et ipsam!</p>
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Hic, suscipit inventore. Hic ipsa nemo suscipit praesentium inventore similique fugiat! Natus facere labore hic necessitatibus possimus tempora nesciunt culpa et ipsam!</p>
-    </div>
+  <div class="container">
+    <header class="resume-header">
+      <div class="name-block">
+        <h1>Peter Menh</h1>
+        <div class="title">Software Engineer</div>
+        <div class="contact">petermenh.developer@gmail.com • (806) 881-8656 </div>
+      </div>
+      <div class="header-meta">
+        <div style="margin-top:6px">linkedin.com/in/petermenh</div>
+      </div>
+      <div class="header-summary">
+        <p>Software engineer with a B.S. in Computer Science and expertise in e-commerce and Salesforce Commerce Cloud. Experienced in leading projects, translating technical concepts for business stakeholders, and delivering high-performance, data-driven solutions. Skilled at process improvement, team collaboration, and aligning technology initiatives with strategic business goals.</p>
+      </div>
+    </header>
+
+    <aside class="sidebar" aria-label="sidebar">
+      <div class="links">
+        <div class="section-title">Location</div>
+        <div class="edu-item">Dallas–Fort Worth, TX</div>
+      </div>
+
+      <div class="skills">
+        <div class="section-title">Key Skills</div>
+        <div class="skill-list">
+          <div class="skill-category">Software Development &amp; Programming</div>
+          <div class="skill-items">
+            <span class="skill">C#</span>
+            <span class="skill">Java</span>
+            <span class="skill">JavaScript</span>
+            <span class="skill">TypeScript</span>
+            <span class="skill">Python</span>
+            <span class="skill">ReactJS</span>
+            <span class="skill">AngularJS</span>
+            <span class="skill">jQuery</span>
+            <span class="skill">ASP.NET Core</span>
+            <span class="skill">HTML5</span>
+            <span class="skill">CSS3</span>
+            <span class="skill">JSON</span>
+            <span class="skill">MVC Pattern</span>
+            <span class="skill">NPM</span>
+            <span class="skill">GitHub</span>
+          </div>
+
+          <div class="skill-category">Mobile Development</div>
+          <div class="skill-items">
+            <span class="skill">Android</span>
+            <span class="skill">iOS</span>
+            <span class="skill">Xamarin</span>
+            <span class="skill">Unity</span>
+          </div>
+
+          <div class="skill-category">Cloud &amp; E-Commerce</div>
+          <div class="skill-items">
+            <span class="skill">Salesforce Commerce Cloud</span>
+            <span class="skill">E-Commerce Platforms</span>
+          </div>
+
+          <div class="skill-category">Project &amp; Program Management</div>
+          <div class="skill-items">
+            <span class="skill">Agile</span>
+            <span class="skill">Scrum</span>
+            <span class="skill">Jira</span>
+            <span class="skill">Risk &amp; Change Management</span>
+            <span class="skill">Project Planning &amp; Execution</span>
+            <span class="skill">Process Improvement</span>
+          </div>
+
+          <div class="skill-category">Platforms &amp; Tools</div>
+          <div class="skill-items">
+            <span class="skill">Windows</span>
+            <span class="skill">macOS</span>
+            <span class="skill">Linux</span>
+            <span class="skill">Microsoft 365 Apps</span>
+          </div>
+        </div>
+       </div>
+
+      <div class="education">
+        <div class="section-title">Education</div>
+        <div class="edu-item"><strong>B.S., Computer Science</strong><div class="muted">University of Texas at Arlington, Dec 2016</div></div>
+        <div class="edu-item"><strong>A.S., Architecture</strong><div class="muted">Amarillo College, May 2008</div></div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <section id="experience">
+        <div class="section-title">Professional Experience</div>
+        <div class="jobs">
+          <article class="job">
+            <header>
+              <h3>Senior Software Developer <span class="company">— Tractor Supply Company (Web Design Services)</span></h3>
+              <time>Sept 2024 — Jul 2025</time>
+            </header>
+            <ul>
+              <li>Engineered a design system with reusable React/TypeScript components, improving consistency across platforms.</li>
+              <li>Partnered with design and business teams to align UI/UX with business objectives.</li>
+              <li>Contributed to 100+ pages of documentation and tutorials, ensuring adoption across teams.</li>
+            </ul>
+          </article>
+
+          <article class="job">
+            <header>
+              <h3>Senior Salesforce Commerce Cloud Developer <span class="company">— Sally Beauty (Retail)</span></h3>
+              <time>Oct 2020 — Sept 2024</time>
+            </header>
+            <ul>
+              <li>Led front-end and back-end enhancements to modernize legacy UI and improve user experience.</li>
+              <li>Boosted site performance via caching optimization and codebase streamlining.</li>
+              <li>Integrated Google Analytics and third-party services to capture insights and enhance customer engagement.</li>
+            </ul>
+          </article>
+
+          <article class="job">
+            <header>
+              <h3>Web Applications Developer <span class="company">— First Command (Financial Planning)</span></h3>
+              <time>Oct 2019 — Oct 2020</time>
+            </header>
+            <ul>
+              <li>Built a digital forms platform that increased advisor productivity and conversion rates.</li>
+              <li>Designed features in AngularJS and ensured stability through unit testing.</li>
+            </ul>
+          </article>
+
+          <article class="job">
+            <header>
+              <h3>Mobile Applications Developer <span class="company">— Southwest Airlines Pilots Association (SWAPA)</span></h3>
+              <time>Mar 2019 — Oct 2019</time>
+            </header>
+            <ul>
+              <li>Developed Xamarin mobile features to support pilots across multiple locations.</li>
+              <li>Partnered with UX designers and pilots to improve workflows and release reliability.</li>
+            </ul>
+          </article>
+
+          <article class="job">
+            <header>
+              <h3>Salesforce Commerce Cloud Developer <span class="company">— Pier 1 Imports (Retail)</span></h3>
+              <time>Apr 2017 — Mar 2019</time>
+            </header>
+            <ul>
+              <li>Enhanced eCommerce performance with caching and responsive design.</li>
+              <li>Managed Adobe &amp; Google Analytics platforms for retail insights.</li>
+              <li>Improved accessibility compliance with ADA standards.</li>
+            </ul>
+          </article>
+
+          <article class="job">
+            <header>
+              <h3>Web Applications Developer <span class="company">— Ayoka Systems (Software Development)</span></h3>
+              <time>May 2016 — Apr 2017</time>
+            </header>
+            <ul>
+              <li>Delivered multiple client solutions using .NET &amp; MVC within strict deadlines.</li>
+              <li>Provided tailored business solutions to diverse industries.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="certifications" style="margin-top:18px">
+        <div class="section-title">Certifications</div>
+        <div>
+          <ul class="cert-list" style="margin:0;padding-left:18px">
+            <li><strong>Connected Manager Certification</strong> — Aug 2025 <span style="color:var(--muted)">| Capgemini University</span></li>
+            <li><strong>Certified SAFe 5 Practitioner</strong> — Apr 2023 <span style="color:var(--muted)">| Scaled Agile</span></li>
+          </ul>
+        </div>
+      </section>
+
+    </main>
+  </div>
 </body>
 </html>
