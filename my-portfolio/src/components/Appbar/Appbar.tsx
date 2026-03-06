@@ -9,7 +9,7 @@ export default function Appbar({
   showMenuIcon = true,
   elevation = 4,
   children,
-  ...rest
+  ...props
 }: AppBarProps) {
 
   return (
@@ -17,7 +17,7 @@ export default function Appbar({
       position={position} 
       elevation={elevation}
       style={backgroundColor ? { backgroundColor } : undefined}
-      {...rest}
+      {...props}
     >
       <Toolbar>
         {showMenuIcon && (
