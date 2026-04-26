@@ -1,6 +1,12 @@
 export { default as Appbar } from './Appbar';
 export * from './Appbar/Appbar.types';
 
+export { default as Drawer } from './Drawer';
+export * from './Drawer/Drawer.types';
+
+export { default as Grid } from './Grid';
+export * from './Grid/Grid.types';
+
 export { default as Box } from './Box';
 export * from './Box/Box.types';
 
@@ -36,3 +42,6 @@ export * from './TextField/TextField.types';
 
 export { default as Typography } from './Typography';
 export * from './Typography/Typography.types';
+
+export { default as Tabs } from './Tabs';
+export * from './Tabs/Tabs.types';
