@@ -58,132 +58,55 @@ Custom props:
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// Default appbar
-export const Default: Story = {
-  args: {
-    title: 'My Portfolio',
-  },
-};
+export const Default: Story = {};
 
-export const WithCustomTitle: Story = {
-  args: {
-    title: 'Custom Application Title',
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: "An app bar with a custom title text.",
-      },
-    },
-  },
-};
-
-export const WithoutMenuIcon: Story = {
-  args: {
-    title: 'Clean Header',
-    showMenuIcon: false,
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: "An app bar without the menu icon for a cleaner look.",
-      },
-    },
-  },
-};
-
-// Different positions
-export const Fixed: Story = {
-  args: {
-    title: 'Fixed Position',
-    position: 'fixed',
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: "A fixed position app bar that stays at the top when scrolling.",
-      },
-    },
-  },
-};
-
-export const Sticky: Story = {
-  args: {
-    title: 'Sticky Position',
-    position: 'sticky',
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: "A sticky app bar that sticks to the top when scrolling.",
-      },
-    },
-  },
-};
-
-// Custom styling
-export const CustomBackground: Story = {
-  args: {
-    title: 'Custom Colors',
-    backgroundColor: '#e74c3c',
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: "An app bar with custom background color.",
-      },
-    },
-  },
-};
-
-export const NoElevation: Story = {
-  args: {
-    title: 'Flat Design',
-    elevation: 0,
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: "An app bar with no shadow for a flat design look.",
-      },
-    },
-  },
-};
-
-export const HighElevation: Story = {
-  args: {
-    title: 'High Shadow',
-    elevation: 12,
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: "An app bar with high elevation for a more prominent shadow.",
-      },
-    },
-  },
-};
-
-// With additional content
 export const WithActions: Story = {
-  args: {
-    title: 'App with Actions',
-    children: (
-      <>
-        <Button color="inherit" sx={{ ml: 1 }}>
-          Login
-        </Button>
-        <Button color="inherit" sx={{ ml: 1 }}>
-          Sign Up
-        </Button>
-      </>
-    ),
-  },
   parameters: {
-    docs: {
-      description: {
-        story: "An app bar with additional action buttons on the right side.",
-      },
-    },
+    docs: { description: { story: 'App bar with nav action buttons in the right slot via children.' } },
   },
+  render: (args) => (
+    <Appbar {...args}>
+      <Button color="inherit">Projects</Button>
+      <Button color="inherit">Resume</Button>
+      <Button color="inherit">Contact</Button>
+    </Appbar>
+  ),
+};
+
+export const NoMenuIcon: Story = {
+  args: { showMenuIcon: false },
+  parameters: {
+    docs: { description: { story: 'App bar without the hamburger menu icon.' } },
+  },
+};
+
+export const FlatNoShadow: Story = {
+  args: { elevation: 0 },
+  parameters: {
+    docs: { description: { story: 'Zero elevation gives a flat, borderless appearance.' } },
+  },
+};
+
+export const CustomColor: Story = {
+  args: { backgroundColor: '#1a1a2e', title: 'Dark Portfolio' },
+  parameters: {
+    docs: { description: { story: 'Override background with any hex color.' } },
+  },
+};
+
+export const PortfolioHeader: Story = {
+  name: 'Portfolio Header (realistic)',
+  parameters: {
+    docs: { description: { story: 'A realistic portfolio header with logo and nav links.' } },
+  },
+  render: () => (
+    <Appbar title="Peter Menh" showMenuIcon={false} elevation={2}>
+      <Button color="inherit" size="small">About</Button>
+      <Button color="inherit" size="small">Projects</Button>
+      <Button color="inherit" size="small">Resume</Button>
+      <Button color="inherit" size="small" variant="outlined" sx={{ ml: 1, borderColor: 'rgba(255,255,255,0.5)' }}>
+        Contact
+      </Button>
+    </Appbar>
+  ),
 };

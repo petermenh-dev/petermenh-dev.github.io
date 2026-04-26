@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { fn } from 'storybook/test';
 import Button from '../Button';
 import { ButtonProps } from '../Button.types';
-
 const meta: Meta<ButtonProps> = {
   title: 'Components/Button',
   component: Button,
@@ -134,10 +133,34 @@ export const CustomBackground: Story = {
   },
 };
 
-// Interactive example
-export const WithClickHandler: Story = {
+export const Outlined: Story = {
   args: {
-    children: 'Click Me!',
-    onClick: () => alert('Button clicked!'),
+    children: 'Outlined Button',
+    variant: 'outlined',
   },
+  parameters: {
+    docs: { description: { story: 'Outlined style for secondary actions.' } },
+  },
+};
+
+export const Text: Story = {
+  args: {
+    children: 'Text Button',
+    variant: 'text',
+  },
+  parameters: {
+    docs: { description: { story: 'Text style for low-emphasis actions.' } },
+  },
+};
+
+/** All three variants side-by-side */
+export const AllVariants: Story = {
+  render: (args) => (
+    <div style={{ display: 'flex', gap: 12 }}>
+      <Button {...args} variant="contained">Contained</Button>
+      <Button {...args} variant="outlined">Outlined</Button>
+      <Button {...args} variant="text">Text</Button>
+    </div>
+  ),
+  args: { primary: true },
 };
