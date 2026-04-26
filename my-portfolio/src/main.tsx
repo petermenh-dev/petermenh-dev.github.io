@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client'
 import { ThemeProvider } from '@mui/material/styles'
 import { CssBaseline } from '@mui/material'
 import './index.css'
-import App from './App.jsx'
+import Home from './Home'
 import './styles/globals.scss'; // global styles import
 import { theme } from './theme'
 
@@ -13,7 +13,7 @@ if (rootElement) {
     <StrictMode>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <App />
+        <Home />
       </ThemeProvider>
     </StrictMode>,
   );
