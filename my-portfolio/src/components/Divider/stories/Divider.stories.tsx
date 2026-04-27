@@ -73,7 +73,7 @@ export const MediumSpacing: Story = {
     <Box sx={{ width: 400 }}>
       <Section title="Experience" body="3 years building web applications." />
       <Divider {...args} />
-      <Section title="Education" body="B.S. Computer Science" />
+      <Section title="Education" body="Bachelor's Computer Science" />
     </Box>
   ),
 };

@@ -157,10 +157,18 @@ export const Text: Story = {
 export const AllVariants: Story = {
   render: (args) => (
     <div style={{ display: 'flex', gap: 12 }}>
-      <Button {...args} variant="contained">Contained</Button>
-      <Button {...args} variant="outlined">Outlined</Button>
-      <Button {...args} variant="text">Text</Button>
+      <Button {...args} variant="contained">
+        Contained
+      </Button>
+      <Button {...args} variant="outlined">
+        Outlined
+      </Button>
+      <Button {...args} variant="text">
+        Text
+      </Button>
     </div>
   ),
-  args: { primary: true },
+  args: {
+    children: undefined,
+  },
 };

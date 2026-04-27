@@ -31,21 +31,33 @@ const customBorderRadius = {
   veryRound: '40px',
 };
 
+const accentGreen = '#3fc443';
+const accentGreenDark = '#2e8e31';
+const surfaceLight = '#ffffff';
+const surfaceDark = '#101311';
+const outlineDark = '#111111';
+const outlineLight = '#f5f7f4';
+
 export const theme = createTheme({
   palette: {
     primary: {
-      main: '#1976d2',
+      main: accentGreen,
+      dark: accentGreenDark,
+      contrastText: '#091109',
     },
     secondary: {
-      main: '#f50057',
+      main: surfaceDark,
+      contrastText: surfaceLight,
     },
     text: {
-      primary: '#222222',
+      primary: '#101311',
+      secondary: '#36503a',
     },
     background: {
-      default: '#ffffff',
-      paper: '#f7f7f7',
+      default: '#f4fff2',
+      paper: surfaceLight,
     },
+    divider: outlineDark,
   },
   typography: {
     fontFamily: '"Arial", Helvetica, sans-serif',
@@ -65,4 +77,113 @@ export const theme = createTheme({
     borderRadius: 8, // Default border radius
   },
   customBorderRadius,
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {
+          backgroundColor: '#f4fff2',
+          color: '#101311',
+        },
+      },
+    },
+    MuiAppBar: {
+      styleOverrides: {
+        root: {
+          backgroundColor: surfaceDark,
+          color: surfaceLight,
+          borderBottom: `2px solid ${outlineLight}`,
+          boxShadow: 'none',
+        },
+      },
+    },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          backgroundColor: surfaceLight,
+          border: `2px solid ${outlineDark}`,
+          boxShadow: 'none',
+        },
+      },
+    },
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          backgroundColor: surfaceLight,
+          border: `2px solid ${outlineDark}`,
+          boxShadow: 'none',
+        },
+      },
+    },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          borderWidth: 2,
+          borderStyle: 'solid',
+          boxShadow: 'none',
+          textTransform: 'none',
+          '&:hover': {
+            boxShadow: 'none',
+          },
+        },
+        containedPrimary: {
+          backgroundColor: accentGreen,
+          borderColor: outlineDark,
+          color: '#091109',
+          '&:hover': {
+            backgroundColor: '#6af06f',
+          },
+        },
+        containedSecondary: {
+          backgroundColor: surfaceDark,
+          borderColor: surfaceLight,
+          color: surfaceLight,
+          '&:hover': {
+            backgroundColor: '#1a1f1b',
+          },
+        },
+        outlinedPrimary: {
+          backgroundColor: surfaceLight,
+          borderColor: outlineDark,
+          color: outlineDark,
+          '&:hover': {
+            backgroundColor: '#efffe9',
+            borderColor: outlineDark,
+          },
+        },
+        outlinedSecondary: {
+          backgroundColor: surfaceDark,
+          borderColor: surfaceLight,
+          color: surfaceLight,
+          '&:hover': {
+            backgroundColor: '#1a1f1b',
+            borderColor: surfaceLight,
+          },
+        },
+      },
+    },
+    MuiChip: {
+      styleOverrides: {
+        root: {
+          border: `1px solid ${outlineDark}`,
+        },
+      },
+    },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          backgroundColor: surfaceLight,
+          '& .MuiOutlinedInput-notchedOutline': {
+            borderColor: outlineDark,
+            borderWidth: 2,
+          },
+          '&:hover .MuiOutlinedInput-notchedOutline': {
+            borderColor: accentGreenDark,
+          },
+          '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+            borderColor: accentGreen,
+          },
+        },
+      },
+    },
+  },
 });
