@@ -1,2 +1,2 @@
-export { default } from './Resume';
-export * from './Resume.types';
+export { default } from './ResumeReact';
+export * from './ResumeReact.types';

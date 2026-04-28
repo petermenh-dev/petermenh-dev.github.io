@@ -1,6 +1,6 @@
-import styles from './Resume.module.scss';
+import styles from './ResumeReact.module.scss';
 
-export default function Resume() {
+export default function ResumeReact() {
   return (
     <div className={styles.container}>
       <header className={styles.resumeHeader}>

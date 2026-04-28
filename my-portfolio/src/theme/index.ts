@@ -79,12 +79,36 @@ export const theme = createTheme({
   customBorderRadius,
   components: {
     MuiCssBaseline: {
-      styleOverrides: {
-        body: {
-          backgroundColor: '#f4fff2',
-          color: '#101311',
-        },
-      },
+      styleOverrides: `
+        *, *::before, *::after {
+          box-sizing: border-box;
+          margin: 0;
+          padding: 0;
+        }
+        body {
+          font-family: Arial, Helvetica, sans-serif;
+          background-color: #f4fff2;
+          color: #101311;
+          line-height: 1.6;
+        }
+        a {
+          color: inherit;
+          text-decoration: none;
+        }
+        img {
+          max-width: 100%;
+          display: block;
+        }
+        h1, h2, h3, h4, h5, h6 {
+          font-weight: 600;
+          line-height: 1.2;
+        }
+        .container {
+          width: 90%;
+          max-width: 1200px;
+          margin: 0 auto;
+        }
+      `,
     },
     MuiAppBar: {
       styleOverrides: {

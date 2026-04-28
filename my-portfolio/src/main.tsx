@@ -4,7 +4,6 @@ import { ThemeProvider } from '@mui/material/styles'
 import { CssBaseline } from '@mui/material'
 import './index.css'
 import Home from './Home'
-import './styles/globals.scss'; // global styles import
 import { theme } from './theme'
 
 const rootElement = document.getElementById('root');

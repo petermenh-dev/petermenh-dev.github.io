@@ -58,6 +58,9 @@ export * from './Projects/Projects.types';
 export { default as Resume } from './Resume';
 export * from './Resume/Resume.types';
 
+export { default as ResumeReact } from './ResumeReact';
+export * from './ResumeReact/ResumeReact.types';
+
 export { default as Skeleton } from './Skeleton';
 export * from './Skeleton/Skeleton.types';
 
