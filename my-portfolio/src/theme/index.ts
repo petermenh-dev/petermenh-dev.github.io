@@ -80,6 +80,12 @@ export const theme = createTheme({
   components: {
     MuiCssBaseline: {
       styleOverrides: `
+        html {
+          font-synthesis: none;
+          text-rendering: optimizeLegibility;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
         *, *::before, *::after {
           box-sizing: border-box;
           margin: 0;
@@ -90,10 +96,16 @@ export const theme = createTheme({
           background-color: #f4fff2;
           color: #101311;
           line-height: 1.6;
+          min-width: 320px;
+          min-height: 100vh;
+          overflow-y: scroll;
         }
         a {
-          color: inherit;
+          color: #1f6b35;
           text-decoration: none;
+        }
+        a:hover {
+          color: #2d9449;
         }
         img {
           max-width: 100%;
@@ -102,6 +114,10 @@ export const theme = createTheme({
         h1, h2, h3, h4, h5, h6 {
           font-weight: 600;
           line-height: 1.2;
+        }
+        h1 {
+          font-size: 3.2em;
+          line-height: 1.1;
         }
         .container {
           width: 90%;
@@ -143,10 +159,22 @@ export const theme = createTheme({
         root: {
           borderWidth: 2,
           borderStyle: 'solid',
+          borderRadius: 8,
+          padding: '0.6em 1.2em',
+          fontSize: '1em',
+          fontWeight: 500,
+          fontFamily: 'inherit',
+          cursor: 'pointer',
+          transition: 'background-color 0.25s, border-color 0.25s, color 0.25s',
           boxShadow: 'none',
           textTransform: 'none',
+          '&:focus, &:focus-visible': {
+            outline: '3px solid #7dff81',
+            outlineOffset: 2,
+          },
           '&:hover': {
             boxShadow: 'none',
+            borderColor: '#3fa85a',
           },
         },
         containedPrimary: {

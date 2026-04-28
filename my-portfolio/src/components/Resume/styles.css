@@ -18,7 +18,6 @@ body{
   color:var(--text);
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
-  padding:40px 20px;
 }
 :root{--sidebar-width:280px}
 .container{

@@ -17,7 +17,6 @@ Supports all MUI AppBar props: \`position\`, \`color\`, \`elevation\`, etc.
 
 Custom props:
 - \`title\`: string — the title displayed in the app bar.
-- \`showMenuIcon\`: boolean — whether to show the menu icon.
 - \`backgroundColor\`: string — custom background color override.
         `,
       },
@@ -28,10 +27,6 @@ Custom props:
     title: {
       control: 'text',
       description: 'The title displayed in the app bar',
-    },
-    showMenuIcon: {
-      control: 'boolean',
-      description: 'Whether to show the menu icon',
     },
     backgroundColor: {
       control: 'color',
@@ -49,7 +44,6 @@ Custom props:
   },
   args: {
     title: 'My Portfolio',
-    showMenuIcon: true,
     position: 'static',
     elevation: 4,
   },
@@ -73,13 +67,6 @@ export const WithActions: Story = {
   ),
 };
 
-export const NoMenuIcon: Story = {
-  args: { showMenuIcon: false },
-  parameters: {
-    docs: { description: { story: 'App bar without the hamburger menu icon.' } },
-  },
-};
-
 export const FlatNoShadow: Story = {
   args: { elevation: 0 },
   parameters: {
@@ -100,7 +87,7 @@ export const PortfolioHeader: Story = {
     docs: { description: { story: 'A realistic portfolio header with logo and nav links.' } },
   },
   render: () => (
-    <Appbar title="Peter Menh" showMenuIcon={false} elevation={2}>
+    <Appbar title="Peter Menh" elevation={2}>
       <Button color="inherit" size="small">About</Button>
       <Button color="inherit" size="small">Projects</Button>
       <Button color="inherit" size="small">Resume</Button>

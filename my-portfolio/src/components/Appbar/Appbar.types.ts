@@ -4,6 +4,6 @@ import { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 export interface AppBarProps extends MuiAppBarProps {
   backgroundColor?: string;
   title?: string;
-  showMenuIcon?: boolean;
   elevation?: number;
+  onTitleClick?: () => void;
 }
