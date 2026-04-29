@@ -26,6 +26,8 @@ export interface ThemeSettings {
   spacingScale: number;
   /** Applies a CSS color-inversion filter on top of the current palette */
   invertColors: boolean;
+  /** Text color used on all buttons */
+  buttonTextColor: string;
 }
 
 /** Default settings matching the current portfolio light-mode theme. */
@@ -39,23 +41,26 @@ export const DEFAULT_SETTINGS: ThemeSettings = {
   baseFontSize: 16,
   spacingScale: 8,
   invertColors: false,
+  buttonTextColor: '#091109',
 };
 
 /**
  * Background and text defaults applied automatically when switching to dark mode.
  * Resets any manual color overrides so the user starts from a sensible dark baseline.
  */
-export const DARK_MODE_DEFAULTS: Pick<ThemeSettings, 'backgroundColor' | 'textColor'> = {
+export const DARK_MODE_DEFAULTS: Pick<ThemeSettings, 'backgroundColor' | 'textColor' | 'buttonTextColor'> = {
   backgroundColor: '#101311',
   textColor: '#f4fff2',
+  buttonTextColor: '#f4fff2',
 };
 
 /**
  * Background and text defaults applied automatically when switching back to light mode.
  */
-export const LIGHT_MODE_DEFAULTS: Pick<ThemeSettings, 'backgroundColor' | 'textColor'> = {
+export const LIGHT_MODE_DEFAULTS: Pick<ThemeSettings, 'backgroundColor' | 'textColor' | 'buttonTextColor'> = {
   backgroundColor: '#f4fff2',
   textColor: '#101311',
+  buttonTextColor: '#091109',
 };
 
 /** Curated list of font families available in the Theme Customizer. */

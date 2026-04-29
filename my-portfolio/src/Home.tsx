@@ -21,8 +21,6 @@ export default function Home() {
   const [showStorybook, setShowStorybook] = React.useState(false);
   const [showResumeHtml, setShowResumeHtml] = React.useState(false);
   const [showResume, setShowResume] = React.useState(false);
-  const [showCustomizer, setShowCustomizer] = React.useState(false);
-
   // Closes all content panels at once
   const closeAllPanels = () => {
     setShowStorybook(false);
@@ -36,25 +34,20 @@ export default function Home() {
         minHeight: '100vh',
         width: '100%',
         display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
+        flexDirection: 'row',
+        alignItems: 'flex-start',
         backgroundColor: 'background.default',
       }}
     >
+      <ThemeCustomizerPanel />
+      {/* Main content column */}
+      <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', minWidth: 0 }}>
       <Appbar
         position="static"
         title="Peter Menh"
         onTitleClick={() => { window.location.href = '/'; }}
       >
         <Box sx={{ display: 'flex', gap: 1, flexWrap: 'nowrap' }}>
-          <Button
-            color="secondary"
-            variant="outlined"
-            size="small"
-            onClick={() => setShowCustomizer(v => !v)}
-          >
-            {showCustomizer ? 'Close Theme' : 'Customize Theme'}
-          </Button>
           <Button
             color="primary"
             variant="contained"
@@ -74,14 +67,19 @@ export default function Home() {
             {showStorybook ? 'Hide Storybook' : 'Design System'}
           </Button>
           <Button
-            color="secondary"
+            color="primary"
             variant="outlined"
             size="small"
             onClick={() => setShowResumeHtml((v) => !v)}
           >
             {showResumeHtml ? 'Hide Resume (HTML)' : 'Resume (HTML)'}
           </Button>
-          <Button color="secondary" variant="outlined" size="small" onClick={() => setShowResume((v) => !v)}>
+          <Button 
+            color="primary" 
+            variant="outlined" 
+            size="small" 
+            onClick={() => setShowResume((v) => !v)}
+          >
             {showResume ? 'Hide Resume' : 'Resume (React)'}
           </Button>
         </Box>
@@ -183,11 +181,7 @@ export default function Home() {
         </Card>
       </Box>
 
-      {/* Theme Customizer sidebar — mounted outside the scrolling content box */}
-      <ThemeCustomizerPanel
-        open={showCustomizer}
-        onClose={() => setShowCustomizer(false)}
-      />
+      </Box>
     </Box>
   );
 }

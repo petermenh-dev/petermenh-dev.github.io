@@ -44,6 +44,7 @@ export function buildTheme(settings: ThemeSettings) {
     baseFontSize,
     spacingScale,
     invertColors,
+    buttonTextColor,
   } = settings;
 
   const isDark = mode === 'dark';
@@ -203,22 +204,22 @@ export function buildTheme(settings: ThemeSettings) {
           containedPrimary: {
             backgroundColor: primaryColor,
             borderColor: outlineColor,
-            color: isDark ? '#ffffff' : '#091109',
+            color: buttonTextColor,
           },
           containedSecondary: {
             backgroundColor: secondaryMain,
             borderColor: isDark ? outlineColor : surfaceColor,
-            color: secondaryContrast,
+            color: buttonTextColor,
           },
           outlinedPrimary: {
             backgroundColor: surfaceColor,
             borderColor: outlineColor,
-            color: outlineColor,
+            color: buttonTextColor,
           },
           outlinedSecondary: {
             backgroundColor: secondaryMain,
             borderColor: isDark ? outlineColor : surfaceColor,
-            color: secondaryContrast,
+            color: buttonTextColor,
           },
         },
       },
