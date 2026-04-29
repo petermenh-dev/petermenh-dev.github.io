@@ -12,6 +12,7 @@ import {
   Typography,
 } from './components';
 import Resume from './components/ResumeReact';
+import ThemeCustomizerPanel from './components/ThemeCustomizer';
 
 const storybookUrl = import.meta.env.VITE_STORYBOOK_URL;
 const resumeUrl = '/src/components/Resume/index.html';
@@ -20,8 +21,9 @@ export default function Home() {
   const [showStorybook, setShowStorybook] = React.useState(false);
   const [showResumeHtml, setShowResumeHtml] = React.useState(false);
   const [showResume, setShowResume] = React.useState(false);
+  const [showCustomizer, setShowCustomizer] = React.useState(false);
 
-  // Call this function to close all panels/buttons
+  // Closes all content panels at once
   const closeAllPanels = () => {
     setShowStorybook(false);
     setShowResumeHtml(false);
@@ -46,13 +48,21 @@ export default function Home() {
       >
         <Box sx={{ display: 'flex', gap: 1, flexWrap: 'nowrap' }}>
           <Button
+            color="secondary"
+            variant="outlined"
+            size="small"
+            onClick={() => setShowCustomizer(v => !v)}
+          >
+            {showCustomizer ? 'Close Theme' : 'Customize Theme'}
+          </Button>
+          <Button
             color="primary"
             variant="contained"
             size="small"
             disabled={!storybookUrl}
             onClick={() => closeAllPanels()}
           >
-            {'Close All'}
+            Close All
           </Button>
           <Button
             color="primary"
@@ -172,6 +182,12 @@ export default function Home() {
           </Box>
         </Card>
       </Box>
+
+      {/* Theme Customizer sidebar — mounted outside the scrolling content box */}
+      <ThemeCustomizerPanel
+        open={showCustomizer}
+        onClose={() => setShowCustomizer(false)}
+      />
     </Box>
   );
 }

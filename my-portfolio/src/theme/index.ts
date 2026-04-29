@@ -1,3 +1,26 @@
+/**
+ * Theme barrel — re-exports everything needed by the rest of the app.
+ * The static `theme` constant is replaced by the runtime buildTheme() builder;
+ * see ThemeCustomizationProvider for how it is wired.
+ */
+
+export type { ThemeSettings } from './customization';
+export {
+  AVAILABLE_FONTS,
+  DEFAULT_SETTINGS,
+  DARK_MODE_DEFAULTS,
+  LIGHT_MODE_DEFAULTS,
+} from './customization';
+export { buildTheme } from './buildTheme';
+export {
+  ThemeCustomizationProvider,
+  useThemeCustomization,
+} from './ThemeCustomizationProvider';
+
+// ---------------------------------------------------------------------------
+// Legacy module augmentation kept here so component style files that import
+// from '../../theme' still see the CustomTheme typings at compile time.
+// ---------------------------------------------------------------------------
 import { createTheme } from '@mui/material/styles';
 
 // Extend the Theme interface to include your custom properties
