@@ -7,7 +7,6 @@
 import React from 'react';
 import {
   Box,
-  Divider,
   FormControl,
   IconButton,
   InputLabel,
@@ -23,6 +22,8 @@ import {
 import PaletteIcon from '@mui/icons-material/Palette';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import { useThemeCustomization } from '../../theme/ThemeCustomizationProvider';
 import { AVAILABLE_FONTS } from '../../theme/customization';
 
@@ -104,6 +105,35 @@ function ColorControl({
   );
 }
 
+/** Reusable expandable section component */
+function ExpandableSection({ title, children }: { title: string; children: React.ReactNode }) {
+  const [open, setOpen] = React.useState(false);
+
+  return (
+    <Box sx={{ mb: 3 }}>
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          cursor: 'pointer',
+          mb: open ? 2 : 0,
+        }}
+        onClick={() => setOpen(!open)}
+      >
+        <Typography
+          variant="subtitle1"
+          sx={{ fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.5px' }}
+        >
+          {title}
+        </Typography>
+        {open ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+      </Box>
+      {open && <Box>{children}</Box>}
+    </Box>
+  );
+}
+
 // ─── Panel ────────────────────────────────────────────────────────────────────
 
 export default function ThemeCustomizerPanel() {
@@ -163,10 +193,6 @@ export default function ThemeCustomizerPanel() {
           flexDirection: 'column',
         }}
       >
-        {/*
-          Inner wrapper is always PANEL_WIDTH wide so controls don't
-          reflow or flash during the slide animation.
-        */}
         <Box sx={{ width: PANEL_WIDTH, display: 'flex', flexDirection: 'column', height: '100%' }}>
 
           {/* Header */}
@@ -187,7 +213,7 @@ export default function ThemeCustomizerPanel() {
             }}
           >
             <Typography variant="h6" sx={{ fontWeight: 700, whiteSpace: 'nowrap' }}>
-              Theme
+              Theme Settings
             </Typography>
             <Tooltip title="Reset all to defaults">
               <IconButton size="small" onClick={resetSettings} aria-label="Reset theme to defaults">
@@ -199,133 +225,125 @@ export default function ThemeCustomizerPanel() {
           {/* Scrollable controls */}
           <Box sx={{ p: 2.5, overflowY: 'auto', flex: 1 }}>
 
-            {/* Color Mode */}
-            <ControlRow label="Color Mode">
-              <ToggleButtonGroup
-                value={settings.mode}
-                exclusive
-                onChange={(_, value: 'light' | 'dark') => {
-                  if (value) updateSetting('mode', value);
-                }}
-                size="small"
-                fullWidth
-                aria-label="Color mode"
-              >
-                <ToggleButton value="light" aria-label="Light mode">☀ Light</ToggleButton>
-                <ToggleButton value="dark" aria-label="Dark mode">🌙 Dark</ToggleButton>
-              </ToggleButtonGroup>
-            </ControlRow>
-
-            <Divider sx={{ my: 2 }} />
-
-            {/* Colors */}
-            <ColorControl
-              label="Primary Color"
-              value={settings.primaryColor}
-              onChange={v => updateSetting('primaryColor', v)}
-            />
-            <ColorControl
-              label="Background Color"
-              value={settings.backgroundColor}
-              onChange={v => updateSetting('backgroundColor', v)}
-            />
-            <ColorControl
-              label="Text Color"
-              value={settings.textColor}
-              onChange={v => updateSetting('textColor', v)}
-            />
-            <ColorControl
-              label="Button Text Color"
-              value={settings.buttonTextColor}
-              onChange={v => updateSetting('buttonTextColor', v)}
-            />
-
-            <Divider sx={{ my: 2 }} />
-
-            {/* Border Radius */}
-            <ControlRow label="Border Radius">
-              <Slider
-                value={settings.borderRadiusScale}
-                onChange={(_, value) => updateSetting('borderRadiusScale', value as number)}
-                min={0}
-                max={3}
-                step={0.25}
-                marks={[
-                  { value: 0, label: 'None' },
-                  { value: 1, label: 'Default' },
-                  { value: 3, label: 'Round' },
-                ]}
-                aria-label="Border radius scale"
-              />
-            </ControlRow>
-
-            {/* Font Family */}
-            <ControlRow label="Font Family">
-              <FormControl fullWidth size="small">
-                <InputLabel>Font</InputLabel>
-                <Select
-                  value={settings.fontFamily}
-                  label="Font"
-                  onChange={e => updateSetting('fontFamily', e.target.value as string)}
+            <ExpandableSection title="Global">
+              <ControlRow label="Color Mode">
+                <ToggleButtonGroup
+                  value={settings.mode}
+                  exclusive
+                  onChange={(_, value: 'light' | 'dark') => {
+                    if (value) updateSetting('mode', value);
+                  }}
+                  size="small"
+                  fullWidth
+                  aria-label="Color mode"
                 >
-                  {AVAILABLE_FONTS.map(font => (
-                    <MenuItem key={font} value={font} style={{ fontFamily: font }}>
-                      {font}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            </ControlRow>
-
-            {/* Base Font Size */}
-            <ControlRow label={`Base Font Size: ${settings.baseFontSize}px`}>
-              <Slider
-                value={settings.baseFontSize}
-                onChange={(_, value) => updateSetting('baseFontSize', value as number)}
-                min={12}
-                max={20}
-                step={1}
-                marks={[
-                  { value: 12, label: '12' },
-                  { value: 16, label: '16' },
-                  { value: 20, label: '20' },
-                ]}
-                aria-label="Base font size"
+                  <ToggleButton value="light" aria-label="Light mode">☀ Light</ToggleButton>
+                  <ToggleButton value="dark" aria-label="Dark mode">🌙 Dark</ToggleButton>
+                </ToggleButtonGroup>
+              </ControlRow>
+              <ColorControl
+                label="Primary Color"
+                value={settings.primaryColor}
+                onChange={v => updateSetting('primaryColor', v)}
               />
-            </ControlRow>
-
-            {/* Spacing Scale */}
-            <ControlRow label={`Spacing Unit: ${settings.spacingScale}px`}>
-              <Slider
-                value={settings.spacingScale}
-                onChange={(_, value) => updateSetting('spacingScale', value as number)}
-                min={4}
-                max={16}
-                step={2}
-                marks={[
-                  { value: 4, label: '4' },
-                  { value: 8, label: '8' },
-                  { value: 16, label: '16' },
-                ]}
-                aria-label="Spacing scale"
+              <ColorControl
+                label="Background Color"
+                value={settings.backgroundColor}
+                onChange={v => updateSetting('backgroundColor', v)}
               />
-            </ControlRow>
-
-            <Divider sx={{ my: 2 }} />
-
-            {/* Invert Colors */}
-            <ControlRow label="Invert Colors">
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                <Switch
-                  checked={settings.invertColors}
-                  onChange={e => updateSetting('invertColors', e.target.checked)}
-                  inputProps={{ 'aria-label': 'Invert colors' }}
+              <ColorControl
+                label="Text Color"
+                value={settings.textColor}
+                onChange={v => updateSetting('textColor', v)}
+              />
+              <ControlRow label="Border Radius">
+                <Slider
+                  value={settings.borderRadiusScale}
+                  onChange={(_, value) => updateSetting('borderRadiusScale', value as number)}
+                  min={0}
+                  max={3}
+                  step={0.25}
+                  marks={[
+                    { value: 0, label: 'None' },
+                    { value: 1, label: 'Default' },
+                    { value: 3, label: 'Round' },
+                  ]}
+                  aria-label="Border radius scale"
                 />
-                <Typography variant="body2" color="text.secondary">
-                  {settings.invertColors ? 'On' : 'Off'}
-                </Typography>
-              </Box>
-            </ControlRow>
+              </ControlRow>
+            </ExpandableSection>
+
+            <ExpandableSection title="Button">
+              <ColorControl
+                label="Button Text Color"
+                value={settings.buttonTextColor}
+                onChange={v => updateSetting('buttonTextColor', v)}
+              />
+            </ExpandableSection>
+
+            <ExpandableSection title="Typography">
+              <ControlRow label="Font Family">
+                <FormControl fullWidth size="small">
+                  <InputLabel>Font</InputLabel>
+                  <Select
+                    value={settings.fontFamily}
+                    label="Font"
+                    onChange={e => updateSetting('fontFamily', e.target.value as string)}
+                  >
+                    {AVAILABLE_FONTS.map(font => (
+                      <MenuItem key={font} value={font} style={{ fontFamily: font }}>
+                        {font}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </ControlRow>
+              <ControlRow label={`Base Font Size: ${settings.baseFontSize}px`}>
+                <Slider
+                  value={settings.baseFontSize}
+                  onChange={(_, value) => updateSetting('baseFontSize', value as number)}
+                  min={12}
+                  max={20}
+                  step={1}
+                  marks={[
+                    { value: 12, label: '12' },
+                    { value: 16, label: '16' },
+                    { value: 20, label: '20' },
+                  ]}
+                  aria-label="Base font size"
+                />
+              </ControlRow>
+              <ControlRow label={`Spacing Unit: ${settings.spacingScale}px`}>
+                <Slider
+                  value={settings.spacingScale}
+                  onChange={(_, value) => updateSetting('spacingScale', value as number)}
+                  min={4}
+                  max={16}
+                  step={2}
+                  marks={[
+                    { value: 4, label: '4' },
+                    { value: 8, label: '8' },
+                    { value: 16, label: '16' },
+                  ]}
+                  aria-label="Spacing scale"
+                />
+              </ControlRow>
+            </ExpandableSection>
+
+            <ExpandableSection title="Advanced">
+              <ControlRow label="Invert Colors">
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                  <Switch
+                    checked={settings.invertColors}
+                    onChange={e => updateSetting('invertColors', e.target.checked)}
+                    inputProps={{ 'aria-label': 'Invert colors' }}
+                  />
+                  <Typography variant="body2" color="text.secondary">
+                    {settings.invertColors ? 'On' : 'Off'}
+                  </Typography>
+                </Box>
+              </ControlRow>
+            </ExpandableSection>
 
           </Box>
         </Box>
