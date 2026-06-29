@@ -1,18 +1,16 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { ThemeProvider } from '@mui/material/styles'
-import { CssBaseline } from '@mui/material'
+import { ThemeCustomizationProvider } from './theme'
 import Home from './Home'
-import { theme } from './theme'
 
 const rootElement = document.getElementById('root');
 if (rootElement) {
   createRoot(rootElement).render(
     <StrictMode>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
+      {/* ThemeCustomizationProvider owns ThemeProvider + CssBaseline internally */}
+      <ThemeCustomizationProvider>
         <Home />
-      </ThemeProvider>
+      </ThemeCustomizationProvider>
     </StrictMode>,
   );
 }
