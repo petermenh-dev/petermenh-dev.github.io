@@ -1,0 +1,171 @@
+.container {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  grid-template-rows: auto 1fr;
+  max-width: 960px;
+  margin: 2rem auto;
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 14px;
+  color: #111;
+  background: #fff;
+  border: 2px solid #111;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.resumeHeader {
+  grid-column: 1 / -1;
+  padding: 1.5rem 2rem;
+  border-bottom: 2px solid #111;
+
+  h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0;
+  }
+}
+
+.title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 2px;
+  color: #3fc443;
+}
+
+.contact {
+  font-size: 0.82rem;
+  margin-top: 4px;
+  color: #444;
+}
+
+.headerMeta {
+  font-size: 0.82rem;
+  margin-top: 4px;
+  color: #444;
+}
+
+.headerSummary {
+  margin-top: 0.75rem;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  max-width: 720px;
+}
+
+.sidebar {
+  grid-column: 1;
+  padding: 1.5rem 1rem;
+  background: #f4fff2;
+  border-right: 2px solid #111;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.sectionTitle {
+  font-weight: 700;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #3fc443;
+  border-bottom: 1px solid #3fc443;
+  padding-bottom: 4px;
+  margin-bottom: 8px;
+}
+
+.eduItem {
+  font-size: 0.82rem;
+  margin-bottom: 6px;
+  line-height: 1.4;
+}
+
+.muted {
+  color: #666;
+  font-size: 0.78rem;
+}
+
+.skillList {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.skillCategory {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #444;
+  margin-top: 6px;
+}
+
+.skillItems {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.skill {
+  background: #fff;
+  border: 1px solid #111;
+  border-radius: 4px;
+  padding: 1px 6px;
+  font-size: 0.72rem;
+}
+
+.main {
+  grid-column: 2;
+  padding: 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.jobs {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.job {
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 4px;
+
+    h3 {
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    time {
+      font-size: 0.78rem;
+      color: #666;
+      white-space: nowrap;
+    }
+  }
+
+  ul {
+    margin: 6px 0 0 0;
+    padding-left: 18px;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: #222;
+  }
+}
+
+.company {
+  font-weight: 400;
+  color: #555;
+}
+
+.certifications {
+  margin-top: 4px;
+}
+
+.certList {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 0.82rem;
+  line-height: 1.8;
+}
