@@ -15,7 +15,9 @@ import Tab from '@mui/material/Tab';
 import Resume from './components/ResumeReact';
 import ThemeCustomizerPanel from './components/ThemeCustomizer';
 
-const storybookUrl = import.meta.env.VITE_STORYBOOK_URL;
+const storybookUrl = import.meta.env.DEV
+  ? 'http://localhost:6006'
+  : './storybook/';
 const resumeUrl = '/src/components/Resume/index.html';
 
 export default function Home() {
