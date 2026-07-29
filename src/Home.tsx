@@ -76,7 +76,7 @@ export default function Home() {
                   </Typography>
                 </Box>
               </Paper>
-              <Divider spacing="large" sx={{ my: '2.5rem' }} />
+              {/* <Divider spacing="large" sx={{ my: '2.5rem' }} />
               <Card>
                 <Box sx={{ p: '1.5rem' }}>
                   <Typography variant="h5" sx={{ fontWeight: 600, mb: '0.5rem' }} gutterBottom>
@@ -93,7 +93,7 @@ export default function Home() {
                     View Projects
                   </Button>
                 </Box>
-              </Card>
+              </Card> */}
             </Box>
           )}
           {tabIndex === 1 && storybookUrl && (
