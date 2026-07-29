@@ -4,7 +4,6 @@ on:
   push:
     branches: ["main"]
 
-# Grant permissions required for GitHub Pages deployment
 permissions:
   contents: read
   pages: write
@@ -21,24 +20,26 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
+      # Updated from @v4 to @v5
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
+      # Updated from @v4 to @v5 and node-version to 22 or 24
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
-          node-version: 20
+          node-version: 22
           cache: 'npm'
 
       - name: Install dependencies
         run: npm ci
 
-      # Runs your combined build script (Vite + Storybook into dist/)
       - name: Build site and Storybook
         run: npm run build:all
 
+      # Updated from @v3 to @v4
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: './dist'
 
