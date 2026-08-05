@@ -4,16 +4,14 @@ import {
   Avatar,
   Badge,
   Box,
-  Button,
-  Card,
-  Divider,
   Paper,
   Typography,
   Tabs,
 } from './components';
 import Tab from '@mui/material/Tab';
+import { useMediaQuery, useTheme } from '@mui/material';
 import Resume from './components/ResumeReact';
-import ThemeCustomizerPanel from './components/ThemeCustomizer';
+import ThemeCustomizerPanel, { THEME_CUSTOMIZER_STRIP_WIDTH } from './components/ThemeCustomizer';
 
 const storybookUrl = import.meta.env.DEV
   ? 'http://localhost:6006'
@@ -22,6 +20,11 @@ const resumeUrl = './resume/index.html';
 
 export default function Home() {
   const [tabIndex, setTabIndex] = React.useState(0); // Home tab is default
+  const theme = useTheme();
+  const horizontalGutterPx = parseFloat(theme.spacing(4)) || 32;
+  const useScrollableTabs = useMediaQuery(
+    `(max-width:${900 + THEME_CUSTOMIZER_STRIP_WIDTH + horizontalGutterPx}px)`,
+  );
 
   return (
     <Box
@@ -43,12 +46,23 @@ export default function Home() {
           onTitleClick={() => { window.location.href = '/'; }}
         />
         {/* Tabs for content panels */}
-        <Box sx={{ width: '100%', maxWidth: 900, mx: 'auto', mt: 2 }}>
+        <Box
+          sx={{
+            width: `min(900px, calc(100vw - ${THEME_CUSTOMIZER_STRIP_WIDTH}px))`,
+            maxWidth: '100%',
+            boxSizing: 'border-box',
+            px: { xs: 1, sm: 2 },
+            mx: 'auto',
+            mt: 2,
+          }}
+        >
           <Tabs
             value={tabIndex}
             onChange={(_, v) => setTabIndex(v)}
             aria-label="Portfolio content panels"
-            variant="fullWidth"
+            variant={useScrollableTabs ? 'scrollable' : 'fullWidth'}
+            scrollButtons={useScrollableTabs ? 'auto' : false}
+            allowScrollButtonsMobile
           >
             <Tab label="Home" />
             <Tab label="Design System" />
