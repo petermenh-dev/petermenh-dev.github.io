@@ -27,7 +27,7 @@ export default function ResumeReact() {
           <div className={styles.eduItem}>Dallas–Fort Worth, TX</div>
         </div>
 
-        <div className={styles.skills}>
+        <section id="skills" className={styles.skills}>
           <div className={styles.sectionTitle}>Key Skills</div>
           <div className={styles.skillList}>
             <div className={styles.skillCategory}>Software Development &amp; Programming</div>
@@ -65,19 +65,35 @@ export default function ResumeReact() {
               ))}
             </div>
           </div>
-        </div>
+        </section>
 
-        <div className={styles.education}>
+        <section id="education" className={styles.education}>
           <div className={styles.sectionTitle}>Education</div>
           <div className={styles.eduItem}>
             <strong>Bachelor's in Computer Science</strong>
-            <div className={styles.muted}>University of Texas at Arlington, Dec 2016</div>
+            <div className={styles.muted}>University of Texas at Arlington</div>
+            <div className={styles.muted}>Dec 2016</div>
           </div>
           <div className={styles.eduItem}>
             <strong>Associate's in Architecture</strong>
-            <div className={styles.muted}>Amarillo College, May 2008</div>
+            <div className={styles.muted}>Amarillo College</div>
+            <div className={styles.muted}>May 2008</div>
           </div>
-        </div>
+        </section>
+
+        <section id="certifications" className={styles.certifications}>
+          <div className={styles.sectionTitle}>Certifications</div>
+          <ul className={styles.certList}>
+            <li>
+              <strong>Connected Manager</strong> 
+              <div><span className={styles.muted}>Aug 2025 | Capgemini University</span></div>
+            </li>
+            <li>
+              <strong>Certified SAFe 5 Practitioner</strong> 
+              <div><span className={styles.muted}>Apr 2023 | Scaled Agile</span></div>
+            </li>
+          </ul>
+        </section>
       </aside>
 
       <main className={styles.main}>
@@ -154,14 +170,6 @@ export default function ResumeReact() {
               </article>
             ))}
           </div>
-        </section>
-
-        <section id="certifications" className={styles.certifications}>
-          <div className={styles.sectionTitle}>Certifications</div>
-          <ul className={styles.certList}>
-            <li><strong>Connected Manager Certification</strong> — Aug 2025 <span className={styles.muted}>| Capgemini University</span></li>
-            <li><strong>Certified SAFe 5 Practitioner</strong> — Apr 2023 <span className={styles.muted}>| Scaled Agile</span></li>
-          </ul>
         </section>
       </main>
     </div>

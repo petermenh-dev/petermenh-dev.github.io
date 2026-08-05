@@ -27,7 +27,7 @@ import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import { useThemeCustomization } from '../../theme/ThemeCustomizationProvider';
 import { AVAILABLE_FONTS } from '../../theme/customization';
 
-const STRIP_WIDTH = 56;
+export const THEME_CUSTOMIZER_STRIP_WIDTH = 56;
 const PANEL_WIDTH = 280; // expanded panel portion (total visible = STRIP_WIDTH + PANEL_WIDTH)
 
 // ─── Internal layout helpers ──────────────────────────────────────────────────
@@ -150,7 +150,7 @@ export default function ThemeCustomizerPanel() {
         display: 'flex',
         flexShrink: 0,
         alignSelf: 'flex-start',
-        width: expanded ? STRIP_WIDTH + PANEL_WIDTH : STRIP_WIDTH,
+        width: expanded ? THEME_CUSTOMIZER_STRIP_WIDTH + PANEL_WIDTH : THEME_CUSTOMIZER_STRIP_WIDTH,
         transition: 'width 0.25s ease, box-shadow 0.25s ease',
         boxShadow: expanded ? 4 : 1,
         zIndex: 100,
@@ -159,7 +159,7 @@ export default function ThemeCustomizerPanel() {
       {/* ── Toggle strip — always visible at 56px ── */}
       <Box
         sx={{
-          width: STRIP_WIDTH,
+          width: THEME_CUSTOMIZER_STRIP_WIDTH,
           flexShrink: 0,
           backgroundColor: 'background.paper',
           borderRight: '1px solid',
